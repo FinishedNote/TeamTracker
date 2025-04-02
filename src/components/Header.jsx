@@ -10,7 +10,7 @@ const Header = () => {
       <div className="l-part">
         <img src="./img/logo.png" alt="logo {site}" />
       </div>
-      <div className={isOpen ? "r-part active" : "r-part"}>
+      <nav className={isOpen ? "active" : ""}>
         <ul className="links">
           <li>
             <NavLink to="/">Home</NavLink>
@@ -36,7 +36,7 @@ const Header = () => {
         {/* <div className="profil">
           <div className="pp"></div>
         </div> */}
-      </div>
+      </nav>
       <Menu className="menu" onClick={() => setIsOpen(!isOpen)} />
     </header>
   );
