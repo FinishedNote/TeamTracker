@@ -1,0 +1,18 @@
+// light
+:root {
+  --primary: #f4f4f4;
+  --secondary: #fafafa;
+  --text-1: #1e1e1e;
+  --text-2: #fff;
+  --special: #2469ff;
+  --special-variant: #2469ff52;
+  --border: #ccc;
+  --default: #ebebeb;
+}
+// dark
+[data-theme="dark"] {
+  --primary: #1e2122;
+  --secondary: #181a1b;
+  --text-1: #fff;
+  --border: #393939;
+}

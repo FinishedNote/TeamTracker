@@ -1,0 +1,119 @@
+.d-header {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  height: 100px;
+  padding: 0 20px;
+  background: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  //   box-shadow: 1px 1px 10px #00000010;
+  z-index: 100;
+
+  .l-part {
+    display: flex;
+    align-items: center;
+  }
+  .menu {
+    display: none;
+    cursor: pointer;
+  }
+  .r-part {
+    display: flex;
+    align-items: center;
+    gap: 5em;
+    transition: transform 300ms ease-out, opacity 300ms ease-out;
+
+    .links {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 3em;
+      li a {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-1);
+      }
+    }
+
+    .auth-buttons {
+      display: flex;
+      align-items: center;
+      gap: 3em;
+
+      a {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .login-btn {
+        color: var(--special);
+      }
+      .register-btn {
+        padding: 12px;
+        border-radius: 10px;
+        color: var(--text-2);
+        background: var(--special);
+      }
+    }
+    .profil {
+      padding: 5px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 1px solid var(--special);
+      .pp {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--special);
+      }
+    }
+  }
+}
+@media screen and (max-width: 1440px) {
+  .d-header {
+    padding: 0 10px;
+
+    .r-part {
+      gap: 2em;
+
+      .auth-buttons {
+        gap: 1em;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .d-header {
+    .menu {
+      display: block;
+    }
+    .r-part {
+      position: absolute;
+      left: 0;
+      top: 100px;
+      width: 100%;
+      height: 50vh;
+      opacity: 0;
+      gap: 3em;
+      transform: translateX(-100%);
+      background: var(--secondary);
+      z-index: 100;
+      flex-direction: column;
+      justify-content: center;
+
+      .links {
+        flex-direction: column;
+      }
+      .auth-buttons {
+        flex-direction: column;
+      }
+    }
+    .r-part.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
