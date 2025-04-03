@@ -1,0 +1,13 @@
+@mixin linkBtn($size: 14px) {
+  font-size: $size;
+  font-weight: 500;
+  padding: 12px;
+  border-radius: 10px;
+  color: var(--text-2);
+  background: var(--special);
+  transition: opacity 200ms ease-out;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}

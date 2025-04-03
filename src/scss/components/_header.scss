@@ -1,3 +1,5 @@
+@use "../abstracts/mixins" as *;
+
 .d-header {
   position: sticky;
   top: 0;
@@ -41,19 +43,14 @@
       align-items: center;
       gap: 3em;
 
-      a {
+      .login-btn {
         font-size: 14px;
         font-weight: 500;
-      }
-
-      .login-btn {
+        padding: 12px;
         color: var(--special);
       }
       .register-btn {
-        padding: 12px;
-        border-radius: 10px;
-        color: var(--text-2);
-        background: var(--special);
+        @include linkBtn;
       }
     }
     .profil {

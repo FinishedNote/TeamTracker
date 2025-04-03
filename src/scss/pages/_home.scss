@@ -1,0 +1,104 @@
+@use "../abstracts/mixins" as *;
+
+.home {
+  .hero-section {
+    width: 100vw;
+    min-height: calc(100vh - 100px);
+    height: calc(100vh - 100px);
+    background: var(--primary);
+    display: flex;
+    gap: 1em;
+
+    .l-part,
+    .r-part {
+      width: 50%;
+      height: 100%;
+      padding: 4rem;
+    }
+
+    .l-part {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10em;
+      h1 {
+        font-size: clamp(2rem, 3vw, 4rem);
+        font-weight: 500;
+        color: var(--text-1);
+
+        span {
+          font-weight: 600;
+        }
+      }
+      .action-buttons {
+        display: flex;
+        gap: 1.5em;
+        button {
+          font-size: 14px;
+          font-weight: 600;
+          width: 200px;
+          padding: 12px 20px;
+          border-radius: 10px;
+          border: 2px solid var(--special);
+          cursor: pointer;
+        }
+        .discover-btn {
+          color: var(--special);
+          background: transparent;
+        }
+        .register-btn button {
+          color: var(--text-2);
+          background: var(--special);
+          transition: opacity 200ms ease-out;
+
+          &:hover {
+            opacity: 0.9;
+          }
+        }
+      }
+    }
+    .r-part {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .img {
+        width: 30vw;
+        height: 30vw;
+        min-width: 400px;
+        min-height: 400px;
+        background: #ccc;
+        border-radius: 15%;
+      }
+    }
+  }
+}
+@media screen and (max-width: 960px) {
+  .home .hero-section {
+    flex-direction: column-reverse;
+    .l-part,
+    .r-part {
+      width: 100%;
+      height: 50%;
+      padding-top: 9rem;
+      align-items: center;
+    }
+    .l-part {
+      justify-content: start;
+      gap: 3em;
+      h1 {
+        text-align: center;
+      }
+    }
+  }
+}
+@media screen and (max-width: 500px) {
+  .home .hero-section {
+    .l-part .action-buttons {
+      flex-direction: column;
+    }
+    .r-part .img {
+      min-width: 300px;
+      min-height: 300px;
+    }
+  }
+}

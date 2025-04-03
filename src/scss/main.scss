@@ -1,6 +1,8 @@
-// global
-@import url("./abstract/_variables.scss");
-@import url("./abstract/_global.scss");
+// abstracts
+@import url("./abstracts/_variables.scss");
+// base (global)
+@import url("./base/_global.scss");
 // components
 @import url("./components/_header.scss");
 // pages
+@import url("./pages/_home.scss");
