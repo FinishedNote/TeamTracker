@@ -1,0 +1,28 @@
+.header-dashboard {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  height: 100px;
+  padding: 0 20px;
+  background: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 1px 1px 10px #00000013;
+
+  .menu {
+    cursor: pointer;
+  }
+  .profil {
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid var(--special);
+    .pp {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--special);
+    }
+  }
+}
