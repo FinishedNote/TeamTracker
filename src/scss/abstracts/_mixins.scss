@@ -1,3 +1,21 @@
+@mixin input {
+  height: 40px;
+  padding: 10px;
+  font-size: 14px;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  color: var(--text-1);
+  background: var(--secondary);
+  transition: border-color 0.2s ease-out;
+
+  &::placeholder {
+    color: var(--border);
+  }
+  &:focus {
+    border-color: #acacac;
+  }
+}
 @mixin linkBtn($size: 14px) {
   font-size: $size;
   font-weight: 500;
@@ -9,5 +27,40 @@
 
   &:hover {
     opacity: 0.9;
+  }
+}
+@mixin button {
+  min-width: 100px;
+  height: 40px;
+  font-weight: 600;
+  position: relative;
+  color: var(--text-2);
+  background: var(--special);
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  box-shadow: 0 0 0 0px rgba(#3b82f6, $alpha: 0.2);
+  cursor: pointer;
+  transition: box-shadow 1s cubic-bezier(0.6, 0, 0, 1), opacity 1s ease-out;
+
+  &:hover {
+    opacity: 0.9;
+    box-shadow: 0 0 0 5px rgba(#3b82f6, $alpha: 0.2);
+  }
+}
+@mixin checkbox($color, $size: 20px) {
+  .checkmark {
+    width: $size;
+    height: $size;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    display: inline-block;
+    cursor: pointer;
+    background: var(--border);
+    transition: background 0.2s ease-out;
+  }
+
+  input:checked + .checkmark {
+    background: var($color);
+    border-color: var($color);
   }
 }

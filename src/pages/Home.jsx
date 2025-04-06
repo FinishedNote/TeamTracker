@@ -22,7 +22,9 @@ const Home = () => {
           </div>
         </div>
         <div className="r-part">
-          <div className="img"></div>
+          <div className="img">
+            <img src="./img/img.png" alt="image" />
+          </div>
         </div>
       </section>
     </div>
