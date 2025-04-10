@@ -1,52 +1,26 @@
 import React, { useState } from "react";
-import supabase from "../supabaseClient";
 import { NavLink, useNavigate } from "react-router";
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isCheck, setIsCheck] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      console.log(error);
-    } else {
-      if (isCheck) {
-        supabase.auth.setSession({ persistSession: true });
-      } else {
-        supabase.auth.setSession({ persistSession: false }); // TODO: debug cette ligne <---
-      }
-      navigate("/dashboard");
-    }
-  };
-  const handleGoogleLogin = async () => {
-    // TODO: A Finir <---
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        queryParams: {
-          access_type: "offline",
-          prompt: "consent",
-          redirectTo: "http://localhost:5173/dashboard",
-        },
-      },
-    });
-  };
-
   return (
-    <div className="l-container">
-      <form onSubmit={(e) => handleSubmit(e)} className="login">
-        <h1>Welcome back</h1>
-        <p>Welcome back! please enter your details.</p>
+    <div className="r-container">
+      <form onSubmit={(e) => handleSubmit(e)} className="register">
+        <h1>Welcome</h1>
+        <p>Welcome! please enter your details.</p>
         <div className="inputs">
+          <label htmlFor="name">Enter your name</label>
+          <div className="inp">
+            <input type="text" placeholder="Name" id="name" required />
+            <select name="default">
+              <option value="coach">Coach</option>
+              <option value="player">Player</option>
+            </select>
+          </div>
           <label htmlFor="email">Enter your email</label>
           <input
             type="email"
@@ -76,27 +50,24 @@ const Login = () => {
             <label htmlFor="rememberme">Remember me</label>
           </div>
           <span>
-            Forgot password? <NavLink to="/reset-password">Click here</NavLink>
+            Already have an account?
+            <NavLink to="/reset-password"> Click here</NavLink>
           </span>
         </div>
-        <button type="submit" className="login-btn">
-          Sign in
+        <button type="submit" className="register-btn">
+          Sign up
         </button>
-        <button
-          type="button"
-          onClick={handleGoogleLogin}
-          className="google-login-btn"
-        >
+        <button type="button" className="google-register-btn">
           <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"
             alt="google"
             className="google-img"
           />
-          Sign in with Google
+          Sign up with Google
         </button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Register;

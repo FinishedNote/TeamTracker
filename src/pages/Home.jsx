@@ -1,16 +1,19 @@
 import React from "react";
 import Header from "../components/Header";
 import { NavLink } from "react-router";
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="home">
       <Header />
       <section className="hero-section">
         <div className="l-part">
           <h1>
-            <span>From the field to victory, </span>
-            follow every progress
+            <span>{t("welcome1")}</span>
+            {t("welcome2")}
           </h1>
           <div className="action-buttons">
             <button type="button" className="discover-btn">
@@ -27,6 +30,12 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <section className="qualities-section">
+        <div className="box"></div>
+        <div className="box"></div>
+        <div className="box"></div>
+      </section>
+      <section className="prices-section"></section>
     </div>
   );
 };

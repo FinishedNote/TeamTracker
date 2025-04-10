@@ -76,6 +76,31 @@
       }
     }
   }
+  .qualities-section {
+    width: 100vw;
+    min-height: 50vh;
+    height: 50vh;
+    background: var(--secondary);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1em;
+
+    .box {
+      width: 25%;
+      min-width: 400px;
+      height: 300px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      background: var(--primary);
+    }
+  }
+  .prices-section {
+    width: 100vw;
+    height: 100vh;
+    background: var(--primary);
+  }
 }
 @media screen and (max-width: 960px) {
   .home .hero-section {
