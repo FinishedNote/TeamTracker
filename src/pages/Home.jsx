@@ -10,15 +10,17 @@ const Home = () => {
             <section className="hero-section">
                 <div className="l-part">
                     <h1>
-                        <span>{t("welcome1")}</span>
-                        {t("welcome2")}
+                        <span>Du terrain à la victoire, </span>
+                        suivez chaque progrès
                     </h1>
                     <div className="action-buttons">
                         <button type="button" className="discover-btn">
-                            Discover
+                            Découvrir
                         </button>
                         <NavLink to="/register" className="register-btn">
-                            <button type="button">Get started for free</button>
+                            <button type="button">
+                                Commencez gratuitement
+                            </button>
                         </NavLink>
                     </div>
                 </div>
