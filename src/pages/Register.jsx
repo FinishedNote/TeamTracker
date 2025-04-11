@@ -1,41 +1,69 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router";
-import { ChevronsRight } from "lucide-react";
+import { useForm, FormProvider } from "react-hook-form";
+import { motion, AnimatePresence } from "framer-motion";
+
+import StepOne from "../components/StepOne";
+import StepTwo from "../components/StepTwo";
+import StepThree from "../components/StepThree";
+
+const steps = [StepOne, StepTwo, StepThree];
 
 const Register = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [isCheck, setIsCheck] = useState(false);
-    const navigate = useNavigate();
+  const [currentStep, setCurrentStep] = useState(0);
+  const methods = useForm({
+    defaultValues: {
+      name: "",
+      role: "Entraineur",
+      email: "",
+      password: "",
+    },
+  });
 
-    return (
-        <div className="r-container">
-            <form onSubmit={(e) => handleSubmit(e)} className="register">
-                <div className="info">
-                    <h1>Team Tracker</h1>
-                    <p>Bienvenue ! Veuillez entrer vos coordonées.</p>
-                </div>
-                <div className="details">
-                    <label htmlFor="name">Entrez votre nom</label>
-                    <input type="text" id="name" placeholder="Nom" />
-                    <select>
-                        <option value="Entraineur">Entraineur</option>
-                        <option value="Joeur">Joueur</option>
-                    </select>
-                </div>
-                <div className="next-step">
-                    <button>
-                        <ChevronsRight />
-                    </button>
-                </div>
-                <div className="progress-bar">
-                    <div className="range">
-                        <div className="progress"></div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    );
+  const nextStep = () => setCurrentStep((s) => s + 1);
+  const prevStep = () => setCurrentStep((s) => s - 1);
+  const isLast = currentStep === steps.length - 1;
+
+  const onSubmit = (data) => {
+    console.log("Final form data:", data);
+  };
+
+  const CurrentComponent = steps[currentStep];
+  const progress = ((currentStep + 1) / steps.length) * 100;
+
+  return (
+    <div className="r-container">
+      <FormProvider {...methods}>
+        <form className="register" onSubmit={methods.handleSubmit(onSubmit)}>
+          <div className="info">
+            <h1>Team Tracker</h1>
+            <p>Bienvenue ! Veuillez entrer vos coordonnées.</p>
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentStep}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.4 }}
+            >
+              <CurrentComponent
+                next={nextStep}
+                prev={prevStep}
+                isLast={isLast}
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="progress-bar">
+            <div className="range">
+              <div className="progress" style={{ width: `${progress}%` }} />
+            </div>
+          </div>
+        </form>
+      </FormProvider>
+    </div>
+  );
 };
 
 export default Register;
