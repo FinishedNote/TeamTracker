@@ -10,104 +10,63 @@
   form {
     padding: 10px;
     width: 400px;
-    height: 450px;
-    height: auto;
+    height: 400px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 1em;
+    gap: 2em;
 
-    label {
-      font-size: 1rem;
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
     }
 
     h1 {
-      padding-top: 10px;
-      font-weight: 600;
       color: var(--text-1);
     }
     p {
       color: var(--border);
     }
 
-    .inputs {
+    .details {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-
-      .inp {
-        display: flex;
-        gap: 1em;
-        input {
-          width: 50%;
-        }
-        select {
-          width: 50%;
-          height: 40px;
-          padding: 10px;
-          font-size: 14px;
-          outline: none;
-          border-radius: 5px;
-          border: 1px solid var(--border);
-          color: var(--text-1);
-          background: var(--secondary);
-        }
-      }
-
-      input {
-        @include input;
-      }
-
-      span {
-        padding: 5px;
-        font-size: 14px;
-
-        a {
-          color: var(--special);
-        }
-      }
-      .remember-me {
-        display: flex;
-        align-items: center;
-        font-size: 14px;
-        gap: 10px;
-
-        input {
-          display: none;
-        }
-
-        @include checkbox(--special);
-      }
+      gap: 1em;
     }
-    .register-btn {
-      @include button;
+
+    input,
+    select {
+      @include input;
     }
-    .google-register-btn {
-      min-width: 100px;
-      height: 40px;
-      color: var(--text-1);
-      background: transparent;
-      border-radius: 5px;
-      border: 1px solid var(--border);
-      cursor: pointer;
+
+    .next-step {
       display: flex;
-      align-items: center;
       justify-content: center;
-      border: 1px solid var(--border);
-      font-weight: 600;
-      gap: 10px;
-      .google-img {
-        width: 25px;
-        height: 25px;
+
+      button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        color: var(--special);
+        background: var(--secondary);
+        cursor: pointer;
       }
     }
-  }
-}
-@media screen and (max-width: 768px) {
-  .l-container form {
-    width: 20%;
-    height: auto;
-    min-width: 300px;
-    min-height: 350px;
+    .progress-bar {
+      .range {
+        width: 100%;
+        height: 15px;
+        background: var(--secondary);
+        border-radius: 30px;
+
+        .progress {
+          width: 25%;
+          height: 100%;
+          background: var(--special);
+          border-radius: 30px;
+        }
+      }
+    }
   }
 }

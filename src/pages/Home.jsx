@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
 import { NavLink } from "react-router";
-import { useTranslation } from "react-i18next";
 
 const Home = () => {
     return (
