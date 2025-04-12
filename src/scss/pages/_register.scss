@@ -79,7 +79,7 @@
     .progress-bar {
       position: absolute;
       left: 50%;
-      bottom: 0;
+      bottom: -10%;
       transform: translate(-50%, -50%);
       .range {
         width: 350px;
@@ -96,5 +96,20 @@
         }
       }
     }
+  }
+}
+@media screen and (max-width: 1024px) {
+  .r-container .role-img {
+    right: -30% !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .r-container .role-img {
+    display: none;
+  }
+}
+@media screen and (max-width: 425px) {
+  .r-container .progress-bar .range {
+    width: 300px !important;
   }
 }
