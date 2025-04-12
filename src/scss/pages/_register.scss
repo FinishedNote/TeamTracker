@@ -69,6 +69,13 @@
         }
       }
     }
+    .role-img {
+      position: absolute;
+      right: -50%;
+      img {
+        width: 100px;
+      }
+    }
     .progress-bar {
       position: absolute;
       left: 50%;

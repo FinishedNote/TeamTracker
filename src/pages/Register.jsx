@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import StepOne from "../components/StepOne";
 import StepTwo from "../components/StepTwo";
 import StepThree from "../components/StepThree";
+import supabase from "../supabaseClient";
 
 const steps = [StepOne, StepTwo, StepThree];
 
@@ -23,8 +24,11 @@ const Register = () => {
   const prevStep = () => setCurrentStep((s) => s - 1);
   const isLast = currentStep === steps.length - 1;
 
-  const onSubmit = (data) => {
-    console.log("Final form data:", data);
+  const onSubmit = async (formData) => {
+    const { data, error } = await supabase.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+    });
   };
 
   const CurrentComponent = steps[currentStep];
@@ -45,7 +49,7 @@ const Register = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.3 }}
             >
               <CurrentComponent
                 next={nextStep}

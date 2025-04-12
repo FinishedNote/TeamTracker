@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { ChevronsRight } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 
 const StepOne = ({ next }) => {
   const {
     register,
     formState: { errors },
     trigger,
+    watch,
   } = useFormContext();
+
+  const role = watch("role");
 
   const handleNext = async () => {
     const valid = await trigger(["name", "role"]);
@@ -29,9 +33,13 @@ const StepOne = ({ next }) => {
       <select
         id="role"
         {...register("role", { required: "Le rôle est requis" })}
+        defaultValue=""
       >
-        <option value="Entraineur">Entraineur</option>
-        <option value="Joueur">Joueur</option>
+        <option value="" disabled hidden>
+          Choisissez un rôle
+        </option>
+        <option value="manager">Entraineur</option>
+        <option value="player">Joueur</option>
       </select>
       {errors.role && <p className="error">{errors.role.message}</p>}
 
@@ -40,6 +48,21 @@ const StepOne = ({ next }) => {
           <ChevronsRight />
         </button>
       </div>
+
+      <AnimatePresence mode="wait">
+        {role && (
+          <motion.div
+            key={role}
+            className="role-img"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
+          >
+            <img src={`./img/${role}.png`} alt="role" />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
