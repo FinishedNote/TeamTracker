@@ -8,25 +8,34 @@ const Home = () => {
       <Header />
       <section className="hero-section">
         <div className="l-part">
-          <h1>
-            <span>Du terrain à la victoire, </span>
-            suivez chaque progrès
-          </h1>
-          <div className="action-buttons">
-            <button type="button" className="discover-btn">
-              Découvrir
+          <div className="title">
+            <h1>Votre équipe, vos données, vos victoires</h1>
+            <h2>Faites passer votre équipe au niveau supérieur</h2>
+          </div>
+          <ul>
+            <li>
+              Statistiques personnalisées
+              <br />
+              pour chaque joueur
+            </li>
+            <li>
+              Suivi des matchs &<br />
+              entrainements
+            </li>
+            <li>Feedbacks et bien plus...</li>
+          </ul>
+          <div className="actions-btn">
+            <NavLink to="/register">Essayer maintenant</NavLink>
+            <button type="button">
+              <p>Voir les fonctionnalités</p>
             </button>
-            <NavLink to="/register" className="register-btn">
-              <button type="button">Commencez gratuitement</button>
-            </NavLink>
           </div>
         </div>
         <div className="r-part">
-          <div className="img">
-            <img src="./img/img2.png" alt="image" />
-          </div>
+          <img src="./img/tempoDemo.png" alt="demo" />
         </div>
       </section>
+      <section className="section-2"></section>
       <section className="qualities-section">
         <div className="box"></div>
         <div className="box"></div>

@@ -12,12 +12,13 @@ const StepThree = ({ prev }) => {
       <label htmlFor="password">Mot de passe</label>
       <input
         type="password"
+        placeholder="Mot de passe"
         id="password"
         {...register("password", {
           required: "Mot de passe requis",
           minLength: {
-            value: 6,
-            message: "Minimum 6 caractères",
+            value: 8,
+            message: "Minimum 8 caractères",
           },
         })}
       />
