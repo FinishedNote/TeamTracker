@@ -35,7 +35,20 @@ const Home = () => {
           <img src="./img/tempoDemo.png" alt="demo" />
         </div>
       </section>
-      <section className="section-2"></section>
+      <section className="section-2">
+        <div className="box">
+          <div className="l-part">
+            <div className="image">
+              <img src="./img/football-team.png" alt="football players" />
+            </div>
+          </div>
+          <div className="r-part">
+            <h2>TeamTracker</h2>
+            <p>Gérer vos équipes comme jamais auparavant</p>
+            <button type="button">Découvrir</button>
+          </div>
+        </div>
+      </section>
       <section className="qualities-section">
         <div className="box"></div>
         <div className="box"></div>

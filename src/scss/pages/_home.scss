@@ -11,14 +11,9 @@
 
     .l-part,
     .r-part {
+      width: 50%;
       height: 100%;
       padding: 4rem;
-    }
-    .l-part {
-      width: 50%;
-    }
-    .r-part {
-      width: 50%;
     }
 
     .l-part {
@@ -82,14 +77,72 @@
 
       img {
         width: 100%;
+        z-index: 1;
       }
     }
   }
   .section-2 {
+    position: relative;
     width: 100vw;
     min-height: 100vh;
-    height: 100vh;
+    height: 80vh;
     background: var(--secondary);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .box {
+      min-width: 1000px;
+      min-height: 500px;
+      width: 50%;
+      height: 50%;
+      background: var(--special-variant-2);
+      border-radius: 40px;
+      display: flex;
+      z-index: 2;
+      .l-part,
+      .r-part {
+        width: 50%;
+        height: 100%;
+        display: flex;
+      }
+      .l-part {
+        align-items: center;
+        justify-content: center;
+        .image {
+          width: 80%;
+          height: 80%;
+
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            border: 2px solid var(--primary);
+          }
+        }
+      }
+      .r-part {
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 4rem;
+
+        h2 {
+          color: var(--text-2);
+          font-size: 2.5rem;
+          font-weight: 600;
+        }
+        p {
+          color: var(--text-2);
+          font-size: 2.3rem;
+          font-weight: 600;
+        }
+        button {
+          @include button;
+          border: none;
+        }
+      }
+    }
   }
   .qualities-section {
     width: 100vw;
@@ -116,6 +169,12 @@
     width: 100vw;
     height: 100vh;
     background: var(--primary);
+  }
+}
+@media screen and (max-width: 1440px) {
+  .section-2 .box {
+    min-width: 800px !important;
+    min-height: 300px !important;
   }
 }
 @media screen and (max-width: 960px) {
@@ -148,20 +207,3 @@
     }
   }
 }
-
-// &::before {
-//   content: "";
-//   width: 1550px;
-//   height: 1550px;
-//   background: radial-gradient(
-//     41.76% 41.76% at 50% 50%,
-//     #006eff93 0%,
-//     rgba(191, 9, 255, 0) 100%
-//   );
-//   border-radius: 50%;
-//   position: absolute;
-//   top: 0%;
-//   left: 0%;
-//   transform: translate(-50%, -50%);
-//   z-index: 1;
-// }
