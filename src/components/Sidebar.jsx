@@ -1,39 +1,91 @@
-import { LayoutDashboard } from "lucide-react";
-import React from "react";
+import {
+  LayoutDashboard,
+  Users,
+  MessagesSquare,
+  ChartArea,
+  Bot,
+  Settings,
+  LogOut,
+  Menu,
+} from "lucide-react";
+import React, { useState } from "react";
 import { NavLink } from "react-router";
+import { AnimatePresence, motion } from "motion/react";
 
 const Sidebar = () => {
+  const [isOpen, setIsOpen] = useState(true);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+  };
+
   return (
-    <aside className="sidebar">
-      <div className="top">
-        <div className="logo">
-          <img src="./img/logo.png" alt="logo TeamTracker" />
-        </div>
-      </div>
-      <div className="bottom">
-        <ul className="links">
-          <li>
-            <LayoutDashboard />
-            <NavLink to="/dashboard">Dashboard</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard">Équipes</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard">Messages</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard">Statistiques</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard">Support</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard">Paramètres</NavLink>
-          </li>
-        </ul>
-      </div>
-    </aside>
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            className="overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+          />
+          <motion.aside
+            className="sidebar"
+            initial={{ x: -250 }}
+            animate={{ x: 0 }}
+            exit={{ x: -250 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <div className="top">
+              <div className="menu">
+                <Menu onClick={() => setIsOpen(false)} />
+              </div>
+              <div className="logo">
+                <img src="./img/logo.png" alt="logo TeamTracker" />
+              </div>
+            </div>
+            <div className="bottom">
+              <ul className="links">
+                <li>
+                  <NavLink to="/dashboard">
+                    <LayoutDashboard /> Dashboard
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/teams">
+                    <Users /> Équipes
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/messages">
+                    <MessagesSquare /> Messages
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/statistics">
+                    <ChartArea /> Statistiques
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/support">
+                    <Bot /> Support
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/settings">
+                    <Settings /> Paramètres
+                  </NavLink>
+                </li>
+              </ul>
+              <li className="logout">
+                <LogOut /> Se déconnecter
+              </li>
+            </div>
+          </motion.aside>
+        </>
+      )}
+    </AnimatePresence>
   );
 };
 
