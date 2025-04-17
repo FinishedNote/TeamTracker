@@ -11,6 +11,7 @@ import {
 import React, { useState } from "react";
 import { NavLink } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
+import supabase from "../supabaseClient";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -78,7 +79,7 @@ const Sidebar = () => {
                   </NavLink>
                 </li>
               </ul>
-              <li className="logout">
+              <li className="logout" onClick={handleSignOut}>
                 <LogOut /> Se déconnecter
               </li>
             </div>

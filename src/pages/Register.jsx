@@ -6,11 +6,13 @@ import StepOne from "../components/StepOne";
 import StepTwo from "../components/StepTwo";
 import StepThree from "../components/StepThree";
 import supabase from "../supabaseClient";
+import { useNavigate } from "react-router";
 
 const steps = [StepOne, StepTwo, StepThree];
 
 const Register = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const navigate = useNavigate();
   const methods = useForm({
     defaultValues: {
       name: "",
@@ -19,6 +21,7 @@ const Register = () => {
       password: "",
     },
   });
+  const [error, setError] = useState("");
 
   const nextStep = () => setCurrentStep((s) => s + 1);
   const prevStep = () => setCurrentStep((s) => s - 1);
@@ -28,7 +31,28 @@ const Register = () => {
     const { data, error } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
+      options: {
+        data: {
+          name: formData.name,
+          role: formData.role,
+        },
+      },
     });
+
+    if (error) {
+      // TODO: verif email
+      console.log(error.code);
+      switch (error.code) {
+        case "weak_password":
+          console.log("password faible");
+          break;
+
+        default:
+          break;
+      }
+    } else {
+      navigate("/login");
+    }
   };
 
   const CurrentComponent = steps[currentStep];
