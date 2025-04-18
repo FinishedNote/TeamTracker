@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import { Menu } from "lucide-react";
 import { motion } from "framer-motion";
+import { useUser } from "../context/UserContext";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, loading } = useUser();
 
   return (
     <header className="d-header">
@@ -42,17 +44,20 @@ const Header = () => {
             <NavLink to="/contact">Contact</NavLink>
           </motion.li>
         </ul>
-        <div className="auth-buttons">
-          <NavLink to="/login" className="login-btn">
-            Se connecter
-          </NavLink>
-          <NavLink to="/register" className="register-btn">
-            Commencer
-          </NavLink>
-        </div>
-        {/* <div className="profil">
-          <div className="pp"></div>
-        </div> */}
+        {!user ? (
+          <div className="auth-buttons">
+            <NavLink to="/login" className="login-btn">
+              Se connecter
+            </NavLink>
+            <NavLink to="/register" className="register-btn">
+              Commencer
+            </NavLink>
+          </div>
+        ) : (
+          <div className="profil">
+            <div className="pp"></div>
+          </div>
+        )}
       </nav>
       <Menu className="menu" onClick={() => setIsOpen(!isOpen)} />
     </header>
