@@ -1,0 +1,25 @@
+.notfound-container {
+  width: 100vw;
+  height: 100vh;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5em;
+  padding: 2em;
+
+  .logo img {
+    scale: 1.2;
+  }
+  h1 {
+    font-size: clamp(1rem, 2vw, 2rem);
+    font-weight: 600;
+    color: var(--text-1);
+    text-align: center;
+  }
+  a {
+    color: var(--special);
+    font-size: clamp(0.8rem, 1.5vw, 1.5rem);
+  }
+}

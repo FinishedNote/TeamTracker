@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   useEffect(() => {
@@ -33,7 +34,7 @@ const App = () => {
               </ProtectedRoute>
             }
           ></Route>
-          <Route path="*" element={<Home />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </UserProvider>
     </Router>

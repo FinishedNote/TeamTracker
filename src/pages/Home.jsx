@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 import { NavLink } from "react-router";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
@@ -55,6 +56,7 @@ const Home = () => {
         <div className="box"></div>
       </section>
       <section className="prices-section"></section>
+      <Footer />
     </div>
   );
 };

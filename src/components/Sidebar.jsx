@@ -12,9 +12,10 @@ import React, { useState } from "react";
 import { NavLink } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 import supabase from "../supabaseClient";
+import { useSidebar } from "../context/SidebarContext";
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, setIsOpen } = useSidebar();
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -39,9 +40,6 @@ const Sidebar = () => {
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
             <div className="top">
-              <div className="menu">
-                <Menu onClick={() => setIsOpen(false)} />
-              </div>
               <div className="logo">
                 <img src="./img/logo.png" alt="logo TeamTracker" />
               </div>

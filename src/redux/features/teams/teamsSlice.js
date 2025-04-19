@@ -7,7 +7,7 @@ export const fetchUserTeams = createAsyncThunk(
     const { data, error } = await supabase
       .from("teams")
       .select("*")
-      .eq("user_id", supabase.auth.getUser().data?.user?.id);
+      .eq("coach_id", supabase.auth.getUser().data?.user?.id);
 
     if (error) {
       return rejectWithValue(error.message);
