@@ -1,14 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { supabase } from "../../supabaseClient"; // adapte le chemin si besoin
+import supabase from "../../../supabaseClient";
 
-// Async thunk pour récupérer les équipes de l'utilisateur
 export const fetchUserTeams = createAsyncThunk(
   "teams/fetchUserTeams",
   async (_, { rejectWithValue }) => {
     const { data, error } = await supabase
       .from("teams")
       .select("*")
-      .eq("user_id", supabase.auth.getUser().data?.user?.id); // on récupère les équipes de l'utilisateur courant
+      .eq("user_id", supabase.auth.getUser().data?.user?.id);
 
     if (error) {
       return rejectWithValue(error.message);

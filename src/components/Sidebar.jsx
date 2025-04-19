@@ -14,7 +14,7 @@ import { AnimatePresence, motion } from "motion/react";
 import supabase from "../supabaseClient";
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
