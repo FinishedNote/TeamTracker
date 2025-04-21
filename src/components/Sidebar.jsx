@@ -6,7 +6,6 @@ import {
   Bot,
   Settings,
   LogOut,
-  Menu,
 } from "lucide-react";
 import React, { useState } from "react";
 import { NavLink } from "react-router";

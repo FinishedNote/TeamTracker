@@ -63,12 +63,13 @@
       padding: 5px;
       border-radius: 50%;
       cursor: pointer;
-      border: 1px solid var(--special);
+      border: 2px dashed var(--special);
       .pp {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         border-radius: 50%;
-        background: var(--special);
+        border: 2px solid var(--special);
+        background: var(--secondary);
       }
     }
   }

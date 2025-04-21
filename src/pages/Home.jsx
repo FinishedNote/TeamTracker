@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../components/Header";
 import { NavLink } from "react-router";
 import Footer from "../components/Footer";
+import { ChartNoAxesColumn, Gem, PiggyBank } from "lucide-react";
 
 const Home = () => {
   return (
@@ -51,11 +52,33 @@ const Home = () => {
         </div>
       </section>
       <section className="qualities-section">
-        <div className="box"></div>
-        <div className="box"></div>
-        <div className="box"></div>
+        <div className="box">
+          <div className="theme">
+            <Gem />
+          </div>
+          <h3>Qualité</h3>
+          <p>
+            Nous vous proposons une large gamme de fonctionnalités haut de
+            gamme.
+          </p>
+        </div>
+        <div className="box">
+          <div className="theme">
+            <ChartNoAxesColumn />
+          </div>
+          <h3>Simplicité</h3>
+          <p>Navigation intuitive pour une utilisation immédiate.</p>
+        </div>
+        <div className="box">
+          <div className="theme">
+            <PiggyBank />
+          </div>
+          <h3>Bon rapport qualité-prix</h3>
+          <p>Bénéficiez d'un service performant à un prix imbattable.</p>
+        </div>
       </section>
       <section className="prices-section"></section>
+      <section className="rates-section"></section>
       <Footer />
     </div>
   );

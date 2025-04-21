@@ -86,8 +86,8 @@
     width: 100vw;
     min-height: 100vh;
     height: 80vh;
+    border-top: 1px solid var(--border);
     background: var(--secondary);
-    border: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -150,6 +150,7 @@
     height: auto;
     padding: 2em;
     background: var(--primary);
+    border: 1px solid var(--border);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -160,15 +161,46 @@
       width: 25%;
       min-width: 400px;
       height: 250px;
+      padding: 2rem 1rem;
+      gap: 1em;
       border-radius: 40px;
       border: 1px solid var(--border);
-      background: var(--secondary);
+      background: #ebebeb;
+      display: flex;
+      flex-direction: column;
+
+      .theme {
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+        border-radius: 50%;
+        background: var(--special-variant);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg {
+          color: var(--special);
+        }
+      }
+
+      h3,
+      p {
+        color: var(--text-1);
+      }
     }
   }
   .prices-section {
     width: 100vw;
     height: 100vh;
+    background: var(--secondary);
+  }
+  .rates-section {
+    width: 100vw;
+    min-height: 50vh;
+    height: auto;
+    padding: 2em;
     background: var(--primary);
+    border: 1px solid var(--border);
   }
 }
 @media screen and (max-width: 1440px) {
