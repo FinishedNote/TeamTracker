@@ -4,11 +4,21 @@ import supabase from "../../../supabaseClient";
 export const fetchUserTeams = createAsyncThunk(
   "teams/fetchUserTeams",
   async (_, { rejectWithValue }) => {
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (authError) {
+      return rejectWithValue(authError.message);
+    }
+
     const { data, error } = await supabase
       .from("teams")
-      .select("*")
-      .eq("coach_id", supabase.auth.getUser().data?.user?.id);
+      .select("name, members")
+      .eq("coach_id", user.id);
 
+    console.log(data);
     if (error) {
       return rejectWithValue(error.message);
     }
