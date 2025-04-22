@@ -41,11 +41,10 @@
           align-items: center;
           gap: 1em;
           color: var(--text-1);
-
-          &.active {
-            color: var(--special);
-            background: var(--special-variant);
-          }
+        }
+        .active {
+          color: var(--special);
+          background: var(--special-variant);
         }
       }
     }

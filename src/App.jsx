@@ -4,9 +4,10 @@ import { UserProvider } from "./context/UserContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import Teams from "./pages/Teams";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
@@ -31,6 +32,14 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          ></Route>
+          <Route
+            path="/dashboard/teams"
+            element={
+              <ProtectedRoute>
+                <Teams />
               </ProtectedRoute>
             }
           ></Route>

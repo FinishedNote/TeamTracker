@@ -9,14 +9,16 @@ export const fetchUserTeams = createAsyncThunk(
       error: authError,
     } = await supabase.auth.getUser();
 
-    user.id;
-
     if (authError) {
       return rejectWithValue(authError.message);
     }
 
-    const { data, error } = await supabase.from("teams").select("*");
+    const { data, error } = await supabase
+      .from("team_members")
+      .select("*")
+      .eq("user_id", user.id);
 
+    console.log(data);
     if (error) {
       return rejectWithValue(error.message);
     }

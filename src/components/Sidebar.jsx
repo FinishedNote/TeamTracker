@@ -7,7 +7,7 @@ import {
   Settings,
   LogOut,
 } from "lucide-react";
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 import supabase from "../supabaseClient";
@@ -46,32 +46,32 @@ const Sidebar = () => {
             <div className="bottom">
               <ul className="links">
                 <li>
-                  <NavLink to="/dashboard">
+                  <NavLink to="/dashboard" end>
                     <LayoutDashboard /> Dashboard
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/teams">
+                  <NavLink to="/dashboard/teams">
                     <Users /> Équipes
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/messages">
+                  <NavLink to="/dashboard/messages">
                     <MessagesSquare /> Messages
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/statistics">
+                  <NavLink to="/dashboard/statistics">
                     <ChartArea /> Statistiques
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/support">
+                  <NavLink to="/dashboard/support">
                     <Bot /> Support
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/settings">
+                  <NavLink to="/dashboard/settings">
                     <Settings /> Paramètres
                   </NavLink>
                 </li>

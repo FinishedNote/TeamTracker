@@ -1,0 +1,11 @@
+.team-card {
+  width: 250px;
+  height: 160px;
+  border-radius: 30px;
+  background: var(--secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1em;
+}
