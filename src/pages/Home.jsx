@@ -3,6 +3,8 @@ import Header from "../components/Header";
 import { NavLink } from "react-router";
 import Footer from "../components/Footer";
 import { ChartNoAxesColumn, Gem, PiggyBank } from "lucide-react";
+import demo from "../assets/tempoDemo.png";
+import footballTeam from "../assets/football-team.png";
 
 const Home = () => {
   return (
@@ -34,14 +36,14 @@ const Home = () => {
           </div>
         </div>
         <div className="r-part">
-          <img src="./img/tempoDemo.png" alt="demo" />
+          <img src={demo} alt="demo" />
         </div>
       </section>
       <section className="section-2">
         <div className="box">
           <div className="l-part">
             <div className="image">
-              <img src="./img/football-team.png" alt="football players" />
+              <img src={footballTeam} alt="football players" />
             </div>
           </div>
           <div className="r-part">

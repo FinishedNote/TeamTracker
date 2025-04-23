@@ -1,0 +1,27 @@
+.teams {
+  .container {
+    width: 100vw;
+    height: calc(100vh - 100px);
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+
+    .text {
+      width: 100%;
+      height: 20px;
+      color: var(--text-1);
+      font-size: 1rem;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .teams {
+    .container {
+      align-items: center;
+      .text {
+        text-align: center;
+      }
+    }
+  }
+}

@@ -1,10 +1,13 @@
 import React from "react";
+import logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
     <footer>
       <div className="top">
-        <div className="logo"></div>
+        <div className="logo">
+          <img src={logo} alt="logo {site}" />
+        </div>
       </div>
       <div className="bottom">
         <p>© 2025 TeamTracker. Tous droits réservés.</p>

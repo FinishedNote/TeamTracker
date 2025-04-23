@@ -3,6 +3,7 @@ import { NavLink } from "react-router";
 import { Menu } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUser } from "../context/UserContext";
+import logo from "../assets/logo.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +12,7 @@ const Header = () => {
   return (
     <header className="d-header">
       <div className="l-part">
-        <img src="./img/logo.png" alt="logo {site}" />
+        <img src={logo} alt="logo {site}" />
       </div>
       <nav className={isOpen ? "active" : ""}>
         <ul className="links">
@@ -20,7 +21,7 @@ const Header = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <NavLink to="/">Accueil</NavLink>
+            <NavLink to="/dashboard">Dashboard</NavLink>
           </motion.li>
           <motion.li
             initial={{ opacity: 0, y: -40 }}

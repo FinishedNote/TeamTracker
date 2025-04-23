@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useFormContext } from "react-hook-form";
 import { ChevronsRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
@@ -59,7 +59,7 @@ const StepOne = ({ next }) => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, delay: 0.3 }}
           >
-            <img src={`./img/${role}.png`} alt="role" />
+            <img src={`../assets/${role}.png`} alt="role" />
           </motion.div>
         )}
       </AnimatePresence>

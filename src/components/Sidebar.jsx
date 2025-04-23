@@ -12,6 +12,7 @@ import { NavLink } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 import supabase from "../supabaseClient";
 import { useSidebar } from "../context/SidebarContext";
+import logo from "../assets/logo.png";
 
 const Sidebar = () => {
   const { isOpen, setIsOpen } = useSidebar();
@@ -40,7 +41,7 @@ const Sidebar = () => {
           >
             <div className="top">
               <div className="logo">
-                <img src="./img/logo.png" alt="logo TeamTracker" />
+                <img src={logo} alt="logo TeamTracker" />
               </div>
             </div>
             <div className="bottom">

@@ -14,16 +14,21 @@ const Teams = () => {
   }, []);
 
   return (
-    <div>
+    <div className="teams">
       <HeaderDashboard />
       <Sidebar />
-      <ul className="teams-card">
-        {data?.map((team, index) => (
-          <TeamCard key={index} team={team} />
-        ))}
-      </ul>
+      <div className="container">
+        <div className="text">
+          <h2>Mes équipes</h2>
+        </div>
+        <ul className="teams-card">
+          {data?.map((team, index) => (
+            <TeamCard key={index} team={team} />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
-
+// loading="lazy"
 export default Teams;
