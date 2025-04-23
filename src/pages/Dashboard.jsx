@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import HeaderDashboard from "../components/HeaderDashboard";
 import Sidebar from "../components/Sidebar";
-import { fetchUserTeams } from "../redux/features/teams/teamsSlice";
+// import { fetchTeams } from "../redux/features/teams/teamsSlice";
 import ky from "ky";
 import { useDispatch } from "react-redux";
 
@@ -33,7 +33,7 @@ const Dashboard = () => {
     // fetchUsers();
     // TODO: config un proxy
 
-    dispatch(fetchUserTeams());
+    // dispatch(fetchTeams());
   }, []);
 
   return (

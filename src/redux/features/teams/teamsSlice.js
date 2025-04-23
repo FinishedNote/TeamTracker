@@ -1,29 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import supabase from "../../../supabaseClient";
+import { fetchTeams, createTeam, updateTeam, deleteTeam } from "./teamsAPI";
 
-export const fetchUserTeams = createAsyncThunk(
-  "teams/fetchUserTeams",
-  async (_, { rejectWithValue }) => {
-    const {
-      data: { user },
-      error: authError,
-    } = await supabase.auth.getUser();
-
-    user.id;
-
-    if (authError) {
-      return rejectWithValue(authError.message);
-    }
-
-    const { data, error } = await supabase.from("teams").select("*");
-
-    if (error) {
-      return rejectWithValue(error.message);
-    }
-
-    return data;
-  }
-);
+export const getTeams = createAsyncThunk("teams/fetchTeams", fetchTeams)
+export const addTeam = createAsyncThunk("teams/createTeam", createTeam)
+export const editTeam = createAsyncThunk("teams/updateTeam", updateTeam)
+export const removeTeam = createAsyncThunk("teams/deleteTeam", deleteTeam)
 
 const teamsSlice = createSlice({
   name: "teams",
@@ -41,18 +22,21 @@ const teamsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUserTeams.pending, (state) => {
+      .addCase(getTeams.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchUserTeams.fulfilled, (state, action) => {
+      .addCase(getTeams.fulfilled, (state, action) => {
         state.loading = false;
         state.teams = action.payload;
       })
-      .addCase(fetchUserTeams.rejected, (state, action) => {
+      .addCase(getTeams.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Une erreur est survenue.";
-      });
+      })
+      .addCase(addTeam.fulfilled, (state, action) => {
+        state.list(push(action.payload));
+      })
   },
 });
 
