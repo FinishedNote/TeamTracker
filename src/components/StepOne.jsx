@@ -2,6 +2,9 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import { ChevronsRight } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import defaultImg from "../assets/Entraineur.png";
+import managerImg from "../assets/manager.png";
+import playerImg from "../assets/player.png";
 
 const StepOne = ({ next }) => {
   const {
@@ -12,6 +15,11 @@ const StepOne = ({ next }) => {
   } = useFormContext();
 
   const role = watch("role");
+  const images = {
+    Entraineur: defaultImg,
+    manager: managerImg,
+    player: playerImg,
+  };
 
   const handleNext = async () => {
     const valid = await trigger(["name", "role"]);
@@ -59,7 +67,7 @@ const StepOne = ({ next }) => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, delay: 0.3 }}
           >
-            <img src={`../assets/${role}.png`} alt="role" />
+            <img src={images[role]} alt={role} />
           </motion.div>
         )}
       </AnimatePresence>

@@ -60,7 +60,7 @@ const Home = () => {
           </div>
           <h3>Qualité</h3>
           <p>
-            Nous vous proposons une large gamme de fonctionnalités haut de
+            Nous vous proposons un large éventail de fonctionnalités haut de
             gamme.
           </p>
         </div>
