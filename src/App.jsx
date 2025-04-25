@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router";
 import { UserProvider } from "./context/UserContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -9,6 +14,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Teams from "./pages/Teams";
 import NotFound from "./pages/NotFound";
+import supabase from "./supabaseClient";
 
 const App = () => {
   useEffect(() => {
@@ -18,6 +24,22 @@ const App = () => {
         supabase.auth.signOut();
       });
     }
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (event === "SIGNED_IN") {
+          const { user } = session;
+          if (!user?.user_metadata?.role) {
+            await supabase.auth.updateUser({
+              data: { role: "player" },
+            });
+          }
+        }
+      }
+    );
+
+    return () => {
+      listener?.subscription?.unsubscribe();
+    };
   }, []);
 
   return (
