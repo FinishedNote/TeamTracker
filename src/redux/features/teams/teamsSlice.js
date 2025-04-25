@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchTeams, createTeam, updateTeam, deleteTeam } from "./teamsAPI";
 
-export const getTeams = createAsyncThunk("teams/fetchTeams", fetchTeams)
-export const addTeam = createAsyncThunk("teams/createTeam", createTeam)
-export const editTeam = createAsyncThunk("teams/updateTeam", updateTeam)
-export const removeTeam = createAsyncThunk("teams/deleteTeam", deleteTeam)
+export const getTeams = createAsyncThunk("teams/fetchTeams", fetchTeams);
+export const addTeam = createAsyncThunk("teams/createTeam", createTeam);
+export const editTeam = createAsyncThunk("teams/updateTeam", updateTeam);
+export const removeTeam = createAsyncThunk("teams/deleteTeam", deleteTeam);
 
 const teamsSlice = createSlice({
   name: "teams",
@@ -36,7 +36,7 @@ const teamsSlice = createSlice({
       })
       .addCase(addTeam.fulfilled, (state, action) => {
         state.list(push(action.payload));
-      })
+      });
   },
 });
 
