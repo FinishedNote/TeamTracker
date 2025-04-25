@@ -101,6 +101,10 @@ const Login = () => {
           />
           Se connecter avec Google
         </button>
+        <hr />
+        <NavLink to="/register" className="register-btn">
+          Créer un compte
+        </NavLink>
       </form>
     </div>
   );

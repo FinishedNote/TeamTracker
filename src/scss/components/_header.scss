@@ -63,13 +63,18 @@
       padding: 5px;
       border-radius: 50%;
       cursor: pointer;
-      border: 2px dashed var(--special);
+      border: 2px solid var(--special);
       .pp {
         width: 35px;
         height: 35px;
         border-radius: 50%;
         border: 2px solid var(--special);
         background: var(--secondary);
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
   }

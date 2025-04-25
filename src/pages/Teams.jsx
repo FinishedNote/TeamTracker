@@ -17,9 +17,13 @@ const Teams = () => {
     dispatch(fetchUser());
   }, []);
 
+  const handleAddTeam = () => {
+    dispatch(addTeam({ name: "", coach_id: user?.id }));
+  };
+
   return (
     <div className="teams">
-      <HeaderDashboard />
+      <HeaderDashboard url={user?.user_metadata.avatar_url} />
       <Sidebar />
       <div className="container">
         <div className="text">
@@ -31,7 +35,7 @@ const Teams = () => {
               <TeamCard key={index} team={team} />
             ))}
             {user?.user_metadata?.role === "manager" && (
-              <div className="team-card add-team" onClick={addTeam}>
+              <div className="team-card add-team" onClick={handleAddTeam}>
                 <Plus />
                 <p>Ajouter une équipe</p>
               </div>
@@ -42,5 +46,5 @@ const Teams = () => {
     </div>
   );
 };
-// loading="lazy"
+// loading="lazy" <--- add this later
 export default Teams;

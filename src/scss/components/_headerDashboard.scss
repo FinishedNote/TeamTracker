@@ -16,15 +16,21 @@
     cursor: pointer;
   }
   .profil {
-    padding: 5px;
     border-radius: 50%;
     cursor: pointer;
-    border: 1px solid var(--special);
+    box-shadow: 0 0 0 5px rgba(#3b82f6, $alpha: 0.2);
+
     .pp {
       width: 40px;
       height: 40px;
       border-radius: 50%;
       background: var(--special);
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
     }
   }
 }

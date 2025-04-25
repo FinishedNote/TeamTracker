@@ -78,6 +78,24 @@
         height: 25px;
       }
     }
+    hr {
+      border: 1px solid var(--border);
+    }
+    .register-btn {
+      min-width: 100px;
+      height: 40px;
+      color: var(--text-1);
+      background: transparent;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      font-weight: 500;
+      gap: 10px;
+    }
   }
 }
 @media screen and (max-width: 768px) {
