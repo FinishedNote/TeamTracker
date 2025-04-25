@@ -2,7 +2,7 @@ import { Menu } from "lucide-react";
 import React from "react";
 import { useSidebar } from "../context/SidebarContext";
 
-const HeaderDashboard = ({ url }) => {
+const HeaderDashboard = ({ url, name }) => {
   const { setIsOpen } = useSidebar();
 
   return (
@@ -12,7 +12,10 @@ const HeaderDashboard = ({ url }) => {
       </div>
       <div className="profil">
         <div className="pp">
-          <img src={url} alt="logo user" />
+          <img
+            src={url ? url : `https://robohash.org/${name}}`}
+            alt="logo user"
+          />
         </div>
       </div>
     </header>

@@ -35,7 +35,7 @@ const teamsSlice = createSlice({
         state.error = action.payload || "Une erreur est survenue.";
       })
       .addCase(addTeam.fulfilled, (state, action) => {
-        state.list(push(action.payload));
+        state.teams.push(action.payload);
       });
   },
 });

@@ -18,12 +18,15 @@ const Teams = () => {
   }, []);
 
   const handleAddTeam = () => {
-    dispatch(addTeam({ name: "", coach_id: user?.id }));
+    dispatch(addTeam({ name: "Chicken", coach_id: user?.id }));
   };
 
   return (
     <div className="teams">
-      <HeaderDashboard url={user?.user_metadata.avatar_url} />
+      <HeaderDashboard
+        url={user?.user_metadata.avatar_url}
+        name={user?.user_metadata.name}
+      />
       <Sidebar />
       <div className="container">
         <div className="text">

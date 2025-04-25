@@ -19,6 +19,7 @@ const Register = () => {
       role: "Entraineur",
       email: "",
       password: "",
+      subscription: 1,
     },
   });
   const [error, setError] = useState("");

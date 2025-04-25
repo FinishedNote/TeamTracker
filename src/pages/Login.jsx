@@ -19,12 +19,12 @@ const Login = () => {
     if (error) {
       console.log(error);
     } else {
-      if (isCheck) {
-        localStorage.setItem("rememberMe", "true");
-        localStorage.removeItem("rememberMe");
-        const { error: signOutErr } = await supabase.auth.signOut();
-        if (signOutErr) console.error(signOutErr);
-      }
+      // if (isCheck) {
+      //   // localStorage.setItem("rememberMe", "true");
+      //   // localStorage.removeItem("rememberMe");
+      //   // const { error: signOutErr } = await supabase.auth.signOut();
+      //   // if (signOutErr) console.error(signOutErr);
+      // } //TODO: correct remember me
 
       navigate("/dashboard");
     }

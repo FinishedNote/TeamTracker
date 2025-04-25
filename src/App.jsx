@@ -1,10 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router";
+import { BrowserRouter as Router, Routes, Route } from "react-router";
 import { UserProvider } from "./context/UserContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -18,12 +13,12 @@ import supabase from "./supabaseClient";
 
 const App = () => {
   useEffect(() => {
-    const remember = localStorage.getItem("rememberMe");
-    if (!remember) {
-      window.addEventListener("beforeunload", () => {
-        supabase.auth.signOut();
-      });
-    }
+    //   const remember = localStorage.getItem("rememberMe");
+    //   if (!remember) {
+    //     window.addEventListener("beforeunload", () => {
+    //       supabase.auth.signOut();
+    //     });
+    //   }
     const { data: listener } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         if (event === "SIGNED_IN") {
