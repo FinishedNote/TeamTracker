@@ -6,7 +6,6 @@ import { getTeams, addTeam } from "../redux/features/teams/teamsSlice";
 import { fetchUser } from "../redux/features/user/userSlice";
 import TeamCard from "../components/TeamCard";
 import { Plus } from "lucide-react";
-import supabase from "../supabaseClient";
 
 const Teams = () => {
   const dispatch = useDispatch();
