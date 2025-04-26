@@ -6,7 +6,9 @@ import { getTeams, addTeam } from "../redux/features/teams/teamsSlice";
 import { fetchUser } from "../redux/features/user/userSlice";
 import TeamCard from "../components/TeamCard";
 import { Plus, X } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion } from "framer-motion";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Teams = () => {
   const dispatch = useDispatch();
@@ -14,17 +16,28 @@ const Teams = () => {
   const user = useSelector((state) => state.user.user);
   const [isOpen, setIsOpen] = useState(false);
   const [teamData, setTeamData] = useState({ coach_id: user?.id });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     dispatch(getTeams());
     dispatch(fetchUser());
   }, [dispatch]);
 
-  const handleAddTeam = useCallback(() => {
-    setIsOpen(false);
-    setTeamData({});
-    dispatch(addTeam(teamData));
-  });
+  useEffect(() => {
+    if (data && user) {
+      setLoading(false);
+    }
+  }, [data, user]);
+
+  const handleAddTeam = useCallback(
+    (e) => {
+      e.preventDefault();
+      setIsOpen(false);
+      dispatch(addTeam(teamData));
+      setTeamData({});
+    },
+    [dispatch, teamData]
+  );
 
   return (
     <div className="teams">
@@ -36,9 +49,11 @@ const Teams = () => {
         </div>
         <div className="teams-container">
           <ul className="teams-cards">
-            {data?.map((team) => (
-              <TeamCard key={team.id} team={team} />
-            ))}
+            {loading ? (
+              <Skeleton width={300} height={200} />
+            ) : (
+              data?.map((team) => <TeamCard key={team.id} team={team} />)
+            )}
             {user?.user_metadata?.role === "manager" && (
               <div
                 className="team-card add-team"
