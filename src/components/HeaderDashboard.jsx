@@ -13,7 +13,7 @@ const HeaderDashboard = ({ url, name }) => {
       <div className="profil">
         <div className="pp">
           <img
-            src={url ? url : `https://robohash.org/${name}}`}
+            src={url ? url : `https://robohash.org/${name}`}
             alt="logo user"
           />
         </div>
