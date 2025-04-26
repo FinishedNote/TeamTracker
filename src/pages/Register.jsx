@@ -19,7 +19,7 @@ const Register = () => {
       role: "Entraineur",
       email: "",
       password: "",
-      subscription: 1,
+      subscriptionTier: "free",
     },
   });
   const [error, setError] = useState("");
@@ -36,6 +36,7 @@ const Register = () => {
         data: {
           name: formData.name,
           role: formData.role,
+          subscriptionTier: "free",
         },
       },
     });

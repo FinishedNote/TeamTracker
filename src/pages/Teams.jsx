@@ -5,18 +5,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTeams, addTeam } from "../redux/features/teams/teamsSlice";
 import { fetchUser } from "../redux/features/user/userSlice";
 import TeamCard from "../components/TeamCard";
-import { Plus, X } from "lucide-react";
+import { X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import AddTeam from "../components/AddTeam";
 
 const Teams = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.teams.teams);
   const user = useSelector((state) => state.user.user);
   const [isOpen, setIsOpen] = useState(false);
-  const [teamData, setTeamData] = useState({ coach_id: user?.id });
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
+
+  const openModal = useCallback(() => setIsOpen(true), []);
+  const closeModal = useCallback(() => setIsOpen(false), []);
+
+  const teamLimit = {
+    free: 1,
+    essential: 3,
+    premium: Infinity,
+  };
+
+  const userPlan = user?.user_metadata?.plan || "free";
+  const teamsCount = data?.length || 0;
+  const canAddTeam = teamsCount < teamLimit[userPlan];
 
   useEffect(() => {
     dispatch(getTeams());
@@ -29,15 +43,12 @@ const Teams = () => {
     }
   }, [data, user]);
 
-  const handleAddTeam = useCallback(
-    (e) => {
-      e.preventDefault();
-      setIsOpen(false);
-      dispatch(addTeam(teamData));
-      setTeamData({});
-    },
-    [dispatch, teamData]
-  );
+  const handleAddTeam = () => {
+    if (name.trim() === "") return;
+    dispatch(addTeam({ name: name, coach_id: user?.id }));
+    setName("");
+    closeModal();
+  };
 
   return (
     <div className="teams">
@@ -55,15 +66,10 @@ const Teams = () => {
               data?.map((team) => <TeamCard key={team.id} team={team} />)
             )}
             {user?.user_metadata?.role === "manager" && (
-              <div
-                className="team-card add-team"
-                onClick={() => setIsOpen(true)}
-              >
-                <Plus />
-                <p>Ajouter une équipe</p>
-              </div>
+              <AddTeam openModal={openModal} disabled={!canAddTeam} />
             )}
           </ul>
+
           <AnimatePresence>
             {isOpen && (
               <motion.div
@@ -80,10 +86,7 @@ const Teams = () => {
                 >
                   <div className="up">
                     <h2>Ajouter une équipe</h2>
-                    <button
-                      onClick={() => setIsOpen(false)}
-                      className="close-button"
-                    >
+                    <button onClick={closeModal} className="close-button">
                       <X />
                     </button>
                   </div>
@@ -91,24 +94,20 @@ const Teams = () => {
                     <input
                       type="text"
                       placeholder="Nom de l'équipe"
-                      onChange={(e) =>
-                        setTeamData((prev) => ({
-                          ...prev,
-                          name: e.target.value,
-                        }))
-                      }
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                     />
-                    <input
-                      type="text"
-                      placeholder="Truc"
-                      onChange={(e) =>
-                        setTeamData((prev) => ({
-                          ...prev,
-                          truc: e.target.value,
-                        }))
-                      }
-                    />
-                    <button onClick={handleAddTeam}>Ajouter</button>
+                    <div className="modal-buttons">
+                      <button
+                        onClick={handleAddTeam}
+                        className="confirm-button"
+                      >
+                        Ajouter
+                      </button>
+                      <button onClick={closeModal} className="cancel-button">
+                        Annuler
+                      </button>
+                    </div>
                   </div>
                 </motion.div>
               </motion.div>
@@ -119,5 +118,5 @@ const Teams = () => {
     </div>
   );
 };
-// loading="lazy" <--- add this later
+
 export default Teams;
