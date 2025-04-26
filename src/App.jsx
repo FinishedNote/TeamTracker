@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Teams from "./pages/Teams";
+import Team from "./pages/Team";
 import NotFound from "./pages/NotFound";
 import supabase from "./supabaseClient";
 
@@ -60,6 +61,7 @@ const App = () => {
               </ProtectedRoute>
             }
           ></Route>
+          <Route path="/dashboard/teams/:id" element={<Team />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </UserProvider>

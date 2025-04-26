@@ -1,8 +1,10 @@
 import { Menu } from "lucide-react";
 import React from "react";
 import { useSidebar } from "../context/SidebarContext";
+import { useSelector } from "react-redux";
 
-const HeaderDashboard = ({ url, name }) => {
+const HeaderDashboard = () => {
+  const user = useSelector((state) => state.user.user);
   const { setIsOpen } = useSidebar();
 
   return (
@@ -13,8 +15,12 @@ const HeaderDashboard = ({ url, name }) => {
       <div className="profil">
         <div className="pp">
           <img
-            src={url ? url : `https://robohash.org/${name}`}
-            alt="logo user"
+            src={
+              user?.user_metadata.avatar_url
+                ? user?.user_metadata.avatar_url
+                : `https://robohash.org/${user?.user_metadata.name}`
+            }
+            alt="user's logo"
           />
         </div>
       </div>

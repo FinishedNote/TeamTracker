@@ -28,10 +28,7 @@ const Teams = () => {
 
   return (
     <div className="teams">
-      <HeaderDashboard
-        url={user?.user_metadata.avatar_url}
-        name={user?.user_metadata.name}
-      />
+      <HeaderDashboard />
       <Sidebar />
       <div className="container">
         <div className="text">
