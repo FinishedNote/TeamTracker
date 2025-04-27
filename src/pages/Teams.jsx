@@ -5,11 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTeams, addTeam } from "../redux/features/teams/teamsSlice";
 import { fetchUser } from "../redux/features/user/userSlice";
 import TeamCard from "../components/TeamCard";
-import { X } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import AddTeam from "../components/AddTeam";
 
 const Teams = () => {
   const dispatch = useDispatch();
@@ -18,9 +17,6 @@ const Teams = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
-
-  const openModal = useCallback(() => setIsOpen(true), []);
-  const closeModal = useCallback(() => setIsOpen(false), []);
 
   const teamLimit = {
     free: 1,
@@ -47,7 +43,7 @@ const Teams = () => {
     if (name.trim() === "") return;
     dispatch(addTeam({ name: name, coach_id: user?.id }));
     setName("");
-    closeModal();
+    setIsOpen(false);
   };
 
   return (
@@ -66,10 +62,20 @@ const Teams = () => {
               data?.map((team) => <TeamCard key={team.id} team={team} />)
             )}
             {user?.user_metadata?.role === "manager" && (
-              <AddTeam openModal={openModal} disabled={!canAddTeam} />
+              <button
+                className={`team-card add-team ${canAddTeam ? "disabled" : ""}`}
+                onClick={() => setIsOpen(true)}
+                disabled={!canAddTeam}
+              >
+                <Plus />
+                <p>
+                  {!canAddTeam
+                    ? "Limite atteinte selon votre plan"
+                    : "Ajouter une équipe"}
+                </p>
+              </button>
             )}
           </ul>
-
           <AnimatePresence>
             {isOpen && (
               <motion.div
@@ -86,7 +92,10 @@ const Teams = () => {
                 >
                   <div className="up">
                     <h2>Ajouter une équipe</h2>
-                    <button onClick={closeModal} className="close-button">
+                    <button
+                      onClick={() => setIsOpen(false)}
+                      className="close-button"
+                    >
                       <X />
                     </button>
                   </div>
@@ -103,9 +112,6 @@ const Teams = () => {
                         className="confirm-button"
                       >
                         Ajouter
-                      </button>
-                      <button onClick={closeModal} className="cancel-button">
-                        Annuler
                       </button>
                     </div>
                   </div>

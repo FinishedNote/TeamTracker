@@ -13,8 +13,8 @@ const Footer = () => {
         <p>© 2025 TeamTracker. Tous droits réservés.</p>
         <div className="legacy">
           <p>CGV</p>
-          <p>Lorem ipsum</p>
           <p>Politique de confidentialité</p>
+          <p>Credit</p>
         </div>
       </div>
     </footer>
