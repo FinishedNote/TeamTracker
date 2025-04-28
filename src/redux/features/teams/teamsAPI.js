@@ -13,27 +13,17 @@ export async function fetchTeams() {
   return data;
 }
 
-export async function createTeam(
-  { newTeam, coach_id, subscriptionTier },
-  { rejectWithValue }
-) {
-  const { count, error: countError } = await supabase
+export async function createTeam({ name, coach_id }, { rejectWithValue }) {
+  const { data, error } = await supabase
     .from(table)
-    .select("*", { count: "exact", head: true });
+    .insert([{ name, coach_id }])
+    .select()
+    .single();
 
-  if (countError) {
-    return rejectWithValue("Erreur lors de la vérification des équipes.");
+  if (error) {
+    return rejectWithValue(error.message);
   }
-
-  const maxTeams = teamLimit[subscriptionTier] || 0;
-
-  // const { data, error } = await supabase
-  //   .from(table)
-  //   .insert([newTeam])
-  //   .select()
-  //   .single();
-  // if (error) throw error;
-  // return data;
+  return data;
 }
 
 export async function updateTeam(id, updatedValues) {

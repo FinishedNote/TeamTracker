@@ -11,4 +11,4 @@ const TeamCard = ({ team }) => {
   );
 };
 
-export default TeamCard;
+export default React.memo(TeamCard);

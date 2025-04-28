@@ -17,12 +17,16 @@ import logo from "../assets/logo.png";
 const Sidebar = () => {
   const { isOpen, setIsOpen } = useSidebar();
 
+  const handleLinkClick = () => {
+    setIsOpen(false);
+  };
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
   };
 
   return (
-    <AnimatePresence>
+    <AnimatePresence exitBeforeEnter>
       {isOpen && (
         <>
           <motion.div
@@ -30,6 +34,7 @@ const Sidebar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.5 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
             onClick={() => setIsOpen(false)}
           />
           <motion.aside
@@ -47,32 +52,32 @@ const Sidebar = () => {
             <div className="bottom">
               <ul className="links">
                 <li>
-                  <NavLink to="/dashboard" end>
+                  <NavLink to="/dashboard" end onClick={handleLinkClick}>
                     <LayoutDashboard /> Dashboard
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/teams">
+                  <NavLink to="/dashboard/teams" onClick={handleLinkClick}>
                     <Users /> Équipes
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/messages">
+                  <NavLink to="/dashboard/messages" onClick={handleLinkClick}>
                     <MessagesSquare /> Messages
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/statistics">
+                  <NavLink to="/dashboard/statistics" onClick={handleLinkClick}>
                     <ChartArea /> Statistiques
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/support">
+                  <NavLink to="/dashboard/support" onClick={handleLinkClick}>
                     <Bot /> Support
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/settings">
+                  <NavLink to="/dashboard/settings" onClick={handleLinkClick}>
                     <Settings /> Paramètres
                   </NavLink>
                 </li>

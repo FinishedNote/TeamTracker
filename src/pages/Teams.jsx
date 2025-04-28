@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderDashboard from "../components/HeaderDashboard";
 import Sidebar from "../components/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,9 +14,11 @@ const Teams = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.teams.teams);
   const user = useSelector((state) => state.user.user);
+
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const teamLimit = {
     free: 1,
@@ -29,22 +31,59 @@ const Teams = () => {
   const canAddTeam = teamsCount < teamLimit[userPlan];
 
   useEffect(() => {
-    dispatch(getTeams());
-    dispatch(fetchUser());
+    const fetchData = async () => {
+      try {
+        await dispatch(fetchUser()).unwrap();
+        await dispatch(getTeams()).unwrap();
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setError("Erreur lors du chargement des données.");
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, [dispatch]);
 
-  useEffect(() => {
-    if (data && user) {
-      setLoading(false);
-    }
-  }, [data, user]);
-
-  const handleAddTeam = () => {
+  const handleAddTeam = async () => {
     if (name.trim() === "") return;
-    dispatch(addTeam({ name: name, coach_id: user?.id }));
-    setName("");
-    setIsOpen(false);
+    try {
+      await dispatch(addTeam({ name: name, coach_id: user?.id })).unwrap();
+      setName("");
+      setIsOpen(false);
+    } catch (err) {
+      console.error("Erreur lors de l'ajout d'une équipe:", err);
+      setError("Impossible d'ajouter l'équipe.");
+    }
   };
+
+  if (loading) {
+    return (
+      <div className="teams">
+        <HeaderDashboard />
+        <Sidebar />
+        <div className="container loading">
+          <div className="text">
+            <h2>Mes équipes</h2>
+          </div>
+          <Skeleton width={250} height={160} borderRadius={30} count={1} />
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="teams">
+        <HeaderDashboard />
+        <Sidebar />
+        <div className="container">
+          <p style={{ color: "red" }}>{error}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="teams">
@@ -56,11 +95,9 @@ const Teams = () => {
         </div>
         <div className="teams-container">
           <ul className="teams-cards">
-            {loading ? (
-              <Skeleton width={300} height={200} />
-            ) : (
-              data?.map((team) => <TeamCard key={team.id} team={team} />)
-            )}
+            {data.map((team) => (
+              <TeamCard key={team.id} team={team} />
+            ))}
             {user?.user_metadata?.role === "manager" && (
               <button
                 className={`team-card add-team ${canAddTeam ? "disabled" : ""}`}
@@ -83,6 +120,7 @@ const Teams = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
               >
                 <motion.div
                   className="modal-content"
