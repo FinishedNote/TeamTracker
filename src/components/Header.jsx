@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router";
 import { Menu } from "lucide-react";
 import { motion } from "framer-motion";
-import { useUser } from "../context/UserContext";
+import { useSelector } from "react-redux";
 import logo from "../assets/logo.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, loading } = useUser();
+  const user = useSelector((state) => state.user.user);
 
   return (
     <header className="d-header">
@@ -16,34 +16,18 @@ const Header = () => {
       </div>
       <nav className={isOpen ? "active" : ""}>
         <ul className="links">
-          <motion.li
-            initial={{ opacity: 0, y: -40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
-          >
+          <li>
             <NavLink to="/dashboard">Dashboard</NavLink>
-          </motion.li>
-          <motion.li
-            initial={{ opacity: 0, y: -40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2, delay: 0.1 }}
-          >
+          </li>
+          <li>
             <NavLink to="/prices">Prix</NavLink>
-          </motion.li>
-          <motion.li
-            initial={{ opacity: 0, y: -40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2, delay: 0.2 }}
-          >
+          </li>
+          <li>
             <NavLink to="/about">À propos</NavLink>
-          </motion.li>
-          <motion.li
-            initial={{ opacity: 0, y: -40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2, delay: 0.3 }}
-          >
+          </li>
+          <li>
             <NavLink to="/contact">Contact</NavLink>
-          </motion.li>
+          </li>
         </ul>
         {!user ? (
           <div className="auth-buttons">
@@ -56,7 +40,17 @@ const Header = () => {
           </div>
         ) : (
           <div className="profil">
-            <div className="pp"></div>
+            <div className="pp">
+              <img
+                src={
+                  user?.user_metadata?.avatar_url ||
+                  (user?.user_metadata?.name
+                    ? `https://robohash.org/${user.user_metadata.name}`
+                    : "https://robohash.org/default-avatar")
+                }
+                alt="user's logo"
+              />
+            </div>
           </div>
         )}
       </nav>

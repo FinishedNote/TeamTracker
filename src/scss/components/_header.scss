@@ -60,20 +60,20 @@
       }
     }
     .profil {
-      padding: 5px;
       border-radius: 50%;
       cursor: pointer;
-      border: 2px solid var(--special);
+      box-shadow: 0 0 0 5px rgba(#3b82f6, $alpha: 0.2);
+
       .pp {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
-        border: 2px solid var(--special);
-        background: var(--secondary);
+        background: var(--special);
 
         img {
           width: 100%;
           height: 100%;
+          border-radius: 50%;
         }
       }
     }

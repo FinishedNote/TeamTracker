@@ -3,7 +3,6 @@ import HeaderDashboard from "../components/HeaderDashboard";
 import Sidebar from "../components/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { getTeams, addTeam } from "../redux/features/teams/teamsSlice";
-import { fetchUser } from "../redux/features/user/userSlice";
 import TeamCard from "../components/TeamCard";
 import { Plus, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -33,7 +32,6 @@ const Teams = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch(fetchUser()).unwrap();
         await dispatch(getTeams()).unwrap();
         setLoading(false);
       } catch (err) {

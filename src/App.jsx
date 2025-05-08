@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
-import { UserProvider } from "./context/UserContext";
-import ProtectedRoute from "./components/ProtectedRoute";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUser } from "./redux/features/user/userSlice";
+import RequireUser from "./components/RequireUser";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -13,13 +14,11 @@ import NotFound from "./pages/NotFound";
 import supabase from "./supabaseClient";
 
 const App = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    //   const remember = localStorage.getItem("rememberMe");
-    //   if (!remember) {
-    //     window.addEventListener("beforeunload", () => {
-    //       supabase.auth.signOut();
-    //     });
-    //   }
     const { data: listener } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         if (event === "SIGNED_IN") {
@@ -38,33 +37,40 @@ const App = () => {
     };
   }, []);
 
+  useEffect(() => {
+    dispatch(fetchUser())
+      .unwrap()
+      .catch((err) => console.error("Erreur utilisateur :", err))
+      .finally(() => setLoading(false));
+  }, [dispatch]);
+
+  if (loading) return <div>Chargement...</div>;
+
   return (
     <Router>
-      <UserProvider>
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/register" element={<Register />}></Route>
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          ></Route>
-          <Route
-            path="/dashboard/teams"
-            element={
-              <ProtectedRoute>
-                <Teams />
-              </ProtectedRoute>
-            }
-          ></Route>
-          <Route path="/dashboard/teams/:id" element={<Team />}></Route>
-          <Route path="*" element={<NotFound />}></Route>
-        </Routes>
-      </UserProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/dashboard"
+          element={
+            <RequireUser>
+              <Dashboard />
+            </RequireUser>
+          }
+        />
+        <Route
+          path="/dashboard/teams"
+          element={
+            <RequireUser>
+              <Teams />
+            </RequireUser>
+          }
+        />
+        <Route path="/dashboard/teams/:id" element={<Team />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </Router>
   );
 };

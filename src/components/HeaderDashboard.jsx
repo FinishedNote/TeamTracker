@@ -16,9 +16,10 @@ const HeaderDashboard = () => {
         <div className="pp">
           <img
             src={
-              user?.user_metadata.avatar_url
-                ? user?.user_metadata.avatar_url
-                : `https://robohash.org/${user?.user_metadata.name}`
+              user?.user_metadata?.avatar_url ||
+              (user?.user_metadata?.name
+                ? `https://robohash.org/${user.user_metadata.name}`
+                : "https://robohash.org/default-avatar")
             }
             alt="user's logo"
           />
