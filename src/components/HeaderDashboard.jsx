@@ -1,11 +1,11 @@
 import { Menu } from "lucide-react";
 import React from "react";
-import { useSidebar } from "../context/SidebarContext";
 import { useSelector } from "react-redux";
+import { useSidebar } from "../context/SidebarContext";
 
 const HeaderDashboard = () => {
-  const user = useSelector((state) => state.user.user);
   const { setIsOpen } = useSidebar();
+  const user = useSelector((state) => state.user.user);
 
   return (
     <header className="header-dashboard">

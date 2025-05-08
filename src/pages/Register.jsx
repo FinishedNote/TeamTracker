@@ -6,7 +6,7 @@ import StepOne from "../components/StepOne";
 import StepTwo from "../components/StepTwo";
 import StepThree from "../components/StepThree";
 import supabase from "../supabaseClient";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const steps = [StepOne, StepTwo, StepThree];
 

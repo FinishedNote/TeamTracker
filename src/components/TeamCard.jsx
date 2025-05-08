@@ -1,6 +1,6 @@
 import React from "react";
 import img from "../assets/img.png";
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 
 const TeamCard = ({ team }) => {
   return (

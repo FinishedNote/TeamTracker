@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { SidebarProvider } from "./context/SidebarContext";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "./redux/features/user/userSlice";
 import RequireUser from "./components/RequireUser";
@@ -47,31 +48,33 @@ const App = () => {
   if (loading) return <div>Chargement...</div>;
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route
-          path="/dashboard"
-          element={
-            <RequireUser>
-              <Dashboard />
-            </RequireUser>
-          }
-        />
-        <Route
-          path="/dashboard/teams"
-          element={
-            <RequireUser>
-              <Teams />
-            </RequireUser>
-          }
-        />
-        <Route path="/dashboard/teams/:id" element={<Team />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
+    <SidebarProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/dashboard"
+            element={
+              <RequireUser>
+                <Dashboard />
+              </RequireUser>
+            }
+          />
+          <Route
+            path="/dashboard/teams"
+            element={
+              <RequireUser>
+                <Teams />
+              </RequireUser>
+            }
+          />
+          <Route path="/dashboard/teams/:id" element={<Team />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    </SidebarProvider>
   );
 };
 

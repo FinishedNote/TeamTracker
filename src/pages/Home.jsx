@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 import Footer from "../components/Footer";
 import { ChartNoAxesColumn, Gem, PiggyBank } from "lucide-react";
 import demo from "../assets/tempoDemo.png";
@@ -60,8 +60,8 @@ const Home = () => {
           </div>
           <h3>Qualité</h3>
           <p>
-            Nous vous proposons un large éventail de fonctionnalités haut de
-            gamme.
+            Nous mettons à votre disposition un large éventail de
+            fonctionnalités haut de gamme.
           </p>
         </div>
         <div className="box">
