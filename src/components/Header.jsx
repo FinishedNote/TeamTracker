@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router";
 import { Menu } from "lucide-react";
-import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import logo from "../assets/logo.png";
 

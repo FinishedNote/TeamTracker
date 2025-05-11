@@ -1,6 +1,6 @@
-import React from "react";
 import HeaderDashboard from "../components/HeaderDashboard";
 import { useParams } from "react-router-dom";
+import Sidebar from "../components/Sidebar";
 
 const Team = () => {
   const { id } = useParams();
@@ -8,6 +8,7 @@ const Team = () => {
   return (
     <div>
       <HeaderDashboard />
+      <Sidebar />
       <p>team {id}</p>
     </div>
   );

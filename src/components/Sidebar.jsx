@@ -62,7 +62,7 @@ const Sidebar = () => {
             <ul className="links">
               {links.map(({ to, label, icon }) => (
                 <li key={to}>
-                  <NavLink to={to} end>
+                  <NavLink to={to}>
                     {icon} {label}
                   </NavLink>
                 </li>
