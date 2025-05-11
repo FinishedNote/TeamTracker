@@ -7,90 +7,74 @@ import {
   Settings,
   LogOut,
 } from "lucide-react";
-import React from "react";
 import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import supabase from "../supabaseClient";
-import { useSidebar } from "../context/SidebarContext";
 import logo from "../assets/logo.png";
+import { useDispatch, useSelector } from "react-redux";
+import { closeSidebar } from "../redux/features/sidebar/sidebarSlice";
 
 const Sidebar = () => {
-  const { isOpen, setIsOpen } = useSidebar();
+  const dispatch = useDispatch();
+  const isOpen = useSelector((state) => state.sidebar.isOpen);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
   };
 
-  return (
-    <>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            onClick={() => setIsOpen(false)}
-          />
-        )}
-      </AnimatePresence>
+  const links = [
+    { to: "/dashboard", label: "Dashboard", icon: <LayoutDashboard /> },
+    { to: "/dashboard/teams", label: "Équipes", icon: <Users /> },
+    { to: "/dashboard/messages", label: "Messages", icon: <MessagesSquare /> },
+    { to: "/dashboard/statistics", label: "Statistiques", icon: <ChartArea /> },
+    { to: "/dashboard/support", label: "Support", icon: <Bot /> },
+    { to: "/dashboard/settings", label: "Paramètres", icon: <Settings /> },
+  ];
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.aside
-            className="sidebar"
-            initial={{ x: -250 }}
-            animate={{ x: 0 }}
-            exit={{ x: -250 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="top">
-              <div className="logo">
-                <img src={logo} alt="logo TeamTracker" />
-              </div>
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          key="overlay"
+          className="overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.5 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          onClick={() => dispatch(closeSidebar())}
+        />
+      )}
+      {isOpen && (
+        <motion.aside
+          key="sidebar"
+          className="sidebar"
+          initial={{ x: -250 }}
+          animate={{ x: 0 }}
+          exit={{ x: -250 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="top">
+            <div className="logo">
+              <img src={logo} alt="logo TeamTracker" />
             </div>
-            <div className="bottom">
-              <ul className="links">
-                <li>
-                  <NavLink to="/dashboard" end>
-                    <LayoutDashboard /> Dashboard
+          </div>
+          <div className="bottom">
+            <ul className="links">
+              {links.map(({ to, label, icon }) => (
+                <li key={to}>
+                  <NavLink to={to} end>
+                    {icon} {label}
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink to="/dashboard/teams">
-                    <Users /> Équipes
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/messages">
-                    <MessagesSquare /> Messages
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/statistics">
-                    <ChartArea /> Statistiques
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/support">
-                    <Bot /> Support
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/dashboard/settings">
-                    <Settings /> Paramètres
-                  </NavLink>
-                </li>
-              </ul>
-              <li className="logout">
-                <LogOut /> Se déconnecter
-              </li>
-            </div>
-          </motion.aside>
-        )}
-      </AnimatePresence>
-    </>
+              ))}
+            </ul>
+            <li className="logout" onClick={handleSignOut}>
+              <LogOut /> Se déconnecter
+            </li>
+          </div>
+        </motion.aside>
+      )}
+    </AnimatePresence>
   );
 };
 

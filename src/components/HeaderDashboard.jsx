@@ -1,16 +1,15 @@
 import { Menu } from "lucide-react";
-import React from "react";
-import { useSelector } from "react-redux";
-import { useSidebar } from "../context/SidebarContext";
+import { useDispatch, useSelector } from "react-redux";
+import { openSidebar } from "../redux/features/sidebar/sidebarSlice";
 
 const HeaderDashboard = () => {
-  const { setIsOpen } = useSidebar();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
 
   return (
     <header className="header-dashboard">
       <div className="menu">
-        <Menu onClick={() => setIsOpen(true)} />
+        <Menu onClick={() => dispatch(openSidebar())} />
       </div>
       <div className="profil">
         <div className="pp">
