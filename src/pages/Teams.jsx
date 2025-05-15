@@ -31,18 +31,19 @@ const Teams = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        await dispatch(getTeams()).unwrap();
-        setLoading(false);
-      } catch (err) {
-        console.error(err);
-        setError("Erreur lors du chargement des données.");
-        setLoading(false);
+      if (!data || data.length === 0) {
+        try {
+          await dispatch(getTeams()).unwrap();
+        } catch (err) {
+          console.error(err);
+          setError("Erreur lors du chargement des données.");
+        }
       }
+      setLoading(false);
     };
 
     fetchData();
-  }, [dispatch]);
+  }, [dispatch, data]);
 
   const handleAddTeam = async () => {
     if (name.trim() === "") return;
@@ -86,75 +87,79 @@ const Teams = () => {
   return (
     <div className="teams">
       <HeaderDashboard />
-      <Sidebar />
-      <div className="container">
-        <div className="text">
-          <h2>Mes équipes</h2>
-        </div>
-        <div className="teams-container">
-          <ul className="teams-cards">
-            {data.map((team) => (
-              <TeamCard key={team.id} team={team} />
-            ))}
-            {user?.user_metadata?.role === "manager" && (
-              <button
-                className={`team-card add-team ${canAddTeam ? "disabled" : ""}`}
-                onClick={() => setIsOpen(true)}
-                disabled={!canAddTeam}
-              >
-                <Plus />
-                <p>
-                  {!canAddTeam
-                    ? "Limite atteinte selon votre plan"
-                    : "Ajouter une équipe"}
-                </p>
-              </button>
-            )}
-          </ul>
-          <AnimatePresence>
-            {isOpen && (
-              <motion.div
-                className="modal-overlay"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <motion.div
-                  className="modal-content"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.8, opacity: 0 }}
+      <div className="super-container">
+        <Sidebar />
+        <div className="container">
+          <div className="text">
+            <h2>Mes équipes</h2>
+          </div>
+          <div className="teams-container">
+            <ul className="teams-cards">
+              {data.map((team) => (
+                <TeamCard key={team.id} team={team} />
+              ))}
+              {user?.user_metadata?.role === "manager" && (
+                <button
+                  className={`team-card add-team ${
+                    canAddTeam ? "disabled" : ""
+                  }`}
+                  onClick={() => setIsOpen(true)}
+                  disabled={!canAddTeam}
                 >
-                  <div className="up">
-                    <h2>Ajouter une équipe</h2>
-                    <button
-                      onClick={() => setIsOpen(false)}
-                      className="close-button"
-                    >
-                      <X />
-                    </button>
-                  </div>
-                  <div className="bottom">
-                    <input
-                      type="text"
-                      placeholder="Nom de l'équipe"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                    <div className="modal-buttons">
+                  <Plus />
+                  <p>
+                    {!canAddTeam
+                      ? "Limite atteinte selon votre plan"
+                      : "Ajouter une équipe"}
+                  </p>
+                </button>
+              )}
+            </ul>
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div
+                  className="modal-overlay"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <motion.div
+                    className="modal-content"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.8, opacity: 0 }}
+                  >
+                    <div className="up">
+                      <h2>Ajouter une équipe</h2>
                       <button
-                        onClick={handleAddTeam}
-                        className="confirm-button"
+                        onClick={() => setIsOpen(false)}
+                        className="close-button"
                       >
-                        Ajouter
+                        <X />
                       </button>
                     </div>
-                  </div>
+                    <div className="bottom">
+                      <input
+                        type="text"
+                        placeholder="Nom de l'équipe"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                      <div className="modal-buttons">
+                        <button
+                          onClick={handleAddTeam}
+                          className="confirm-button"
+                        >
+                          Ajouter
+                        </button>
+                      </div>
+                    </div>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </div>

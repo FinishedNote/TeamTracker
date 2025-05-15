@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from "react-router";
 import { motion } from "framer-motion";
+import supabase from "../supabaseClient";
 import {
   Bot,
   ChartArea,
@@ -22,9 +23,8 @@ const links = [
 const Sidebar = () => {
   const location = useLocation();
 
-  const handleLogout = () => {
-    // Ajoute ici ta logique de déconnexion
-    console.log("Déconnexion...");
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
   };
 
   return (
