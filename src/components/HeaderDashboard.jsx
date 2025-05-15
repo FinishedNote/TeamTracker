@@ -1,6 +1,5 @@
 import { Menu } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { openSidebar } from "../redux/features/sidebar/sidebarSlice";
 
 const HeaderDashboard = () => {
   const dispatch = useDispatch();
@@ -9,7 +8,7 @@ const HeaderDashboard = () => {
   return (
     <header className="header-dashboard">
       <div className="menu">
-        <Menu onClick={() => dispatch(openSidebar())} />
+        <Menu />
       </div>
       <div className="profil">
         <div className="pp">

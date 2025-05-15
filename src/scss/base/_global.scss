@@ -13,3 +13,16 @@ body {
   background: var(--primary);
   overflow-x: hidden;
 }
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #dbdbdb;
+}
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}

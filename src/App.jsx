@@ -12,6 +12,10 @@ import Teams from "./pages/Teams";
 import Team from "./pages/Team";
 import NotFound from "./pages/NotFound";
 import supabase from "./supabaseClient";
+import Statistics from "./pages/Statistics";
+import Messages from "./pages/Messages";
+import Support from "./pages/Support";
+import Settings from "./pages/Settings";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -69,6 +73,38 @@ const App = () => {
           }
         />
         <Route path="/dashboard/teams/:id" element={<Team />} />
+        <Route
+          path="/dashboard/statistics"
+          element={
+            <RequireUser>
+              <Statistics />
+            </RequireUser>
+          }
+        />
+        <Route
+          path="/dashboard/messages"
+          element={
+            <RequireUser>
+              <Messages />
+            </RequireUser>
+          }
+        />
+        <Route
+          path="/dashboard/support"
+          element={
+            <RequireUser>
+              <Support />
+            </RequireUser>
+          }
+        />
+        <Route
+          path="/dashboard/settings"
+          element={
+            <RequireUser>
+              <Settings />
+            </RequireUser>
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
