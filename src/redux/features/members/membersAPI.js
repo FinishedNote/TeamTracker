@@ -4,18 +4,17 @@ const table = "team_members";
 
 export async function fetchMembers() {
   const { data, error } = await supabase.from(table).select("*");
-  console.log(data);
   if (error) throw error;
   return data;
 }
 
 export async function createMembers(
-  { user_id, team_id, role },
+  { user_id, team_id, role, userId },
   { rejectWithValue }
 ) {
   const { data, error } = await supabase
     .from(table)
-    .insert([{ user_id, team_id, role }])
+    .insert([{ user_id, team_id, role, added_by: userId }])
     .select()
     .single();
 

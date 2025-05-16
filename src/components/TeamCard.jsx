@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const TeamCard = ({ team }) => {
   return (
-    <NavLink to={`/dashboard/teams/${team.id}`} className="team-card">
+    <NavLink to={`/dashboard/teams/${team.name}`} className="team-card">
       <img src={img} alt="img" />
       <p>{team.name}</p>
     </NavLink>
