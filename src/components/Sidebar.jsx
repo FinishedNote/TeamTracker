@@ -10,6 +10,7 @@ import {
   Settings,
   Users,
 } from "lucide-react";
+import logoImg from "../assets/logo.png";
 
 const links = [
   { to: "/dashboard", label: "Bureau", icon: <LayoutDashboard /> },
@@ -31,7 +32,9 @@ const Sidebar = () => {
     <nav id="sidebar">
       <ul>
         <li>
-          <span className="logo">TeamTracker</span>
+          <span className="logo">
+            <img src={logoImg} alt="" />
+          </span>
         </li>
 
         {links.map(({ to, label, icon }) => (

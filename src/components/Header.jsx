@@ -16,7 +16,7 @@ const Header = () => {
       <nav className={isOpen ? "active" : ""}>
         <ul className="links">
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/">Accueil</NavLink>
           </li>
           <li>
             <NavLink to="/prices">Prix</NavLink>
