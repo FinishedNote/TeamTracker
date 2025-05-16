@@ -19,7 +19,9 @@ const Team = () => {
       <HeaderDashboard />
       <div className="container">
         <Sidebar />
-        <AddMember />
+        <div className="box">
+          <AddMember />
+        </div>
       </div>
     </div>
   );

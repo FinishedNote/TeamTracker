@@ -1,0 +1,44 @@
+@use "../abstracts/mixins" as *;
+
+.add-member {
+  width: 50%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 1px 1px 30px #0000001e;
+  background: var(--secondary);
+
+  .email,
+  .role {
+    flex: 1 0 130px;
+    height: 40px;
+    padding: 10px;
+    font-size: 14px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    color: var(--text-1);
+    background: var(--secondary);
+    transition: border-color 0.2s ease-out;
+
+    &::placeholder {
+      color: var(--border);
+    }
+    &:focus {
+      border-color: #acacac;
+    }
+  }
+
+  button {
+    flex: 1 0 40px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    @include button;
+  }
+}

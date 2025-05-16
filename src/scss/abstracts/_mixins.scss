@@ -1,4 +1,4 @@
-@mixin input {
+@mixin input() {
   height: 40px;
   padding: 10px;
   font-size: 14px;
@@ -29,15 +29,15 @@
     opacity: 0.9;
   }
 }
-@mixin button {
+@mixin button($height: 40px) {
   min-width: 100px;
-  height: 40px;
+  height: $height;
   font-weight: 600;
   position: relative;
   color: var(--text-2);
   background: var(--special);
   border-radius: 5px;
-  border: 1px solid var(--border);
+  border: none;
   box-shadow: 0 0 0 0px rgba(#3b82f6, $alpha: 0.2);
   cursor: pointer;
   transition: box-shadow 1s cubic-bezier(0.6, 0, 0, 1), opacity 1s ease-out;
