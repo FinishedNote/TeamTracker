@@ -1,24 +1,20 @@
 import supabase from "../../../supabaseClient";
 
-const table = "team_members";
+const table = "profiles";
 
-export async function fetchMembers(teamId) {
-  const { data, error } = await supabase
-    .from("team_members")
-    .select("*, profiles(username)")
-    .eq("team_id", teamId);
-
+export async function fetchProfiles() {
+  const { data, error } = await supabase.from(table).select("*");
   if (error) throw error;
   return data;
 }
 
-export async function createMembers(
-  { user_id, team_id, role, userId },
+export async function createProfiles(
+  { user_id, email, username, role },
   { rejectWithValue }
 ) {
   const { data, error } = await supabase
     .from(table)
-    .insert([{ user_id, team_id, role, added_by: userId }])
+    .insert([{ user_id, email, username, role }])
     .select()
     .single();
 

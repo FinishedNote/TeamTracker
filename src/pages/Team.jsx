@@ -1,7 +1,7 @@
 import HeaderDashboard from "../components/HeaderDashboard";
 import { useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getMembers } from "../redux/features/members/membersSlice";
 import { getTeams } from "../redux/features/teams/teamsSlice";
 import { useEffect } from "react";
@@ -11,10 +11,10 @@ import SortRole from "../components/SortRole";
 const Team = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const currentMembers = useSelector((state) => state.members.members);
 
   useEffect(() => {
-    dispatch(getMembers());
-    dispatch(getTeams());
+    dispatch(getMembers(id));
   }, [dispatch]);
 
   return (
@@ -31,7 +31,11 @@ const Team = () => {
               <h2>{id}</h2>
             </div>
             <SortRole />
-            <ul className="members-list"></ul>
+            <ul className="members-list">
+              {currentMembers.map((member) => (
+                <li key={member.id}>{member.role}</li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

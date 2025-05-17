@@ -20,7 +20,7 @@ const Teams = () => {
   const [error, setError] = useState(null);
 
   const teamLimit = {
-    free: 1,
+    free: 2,
     essential: 3,
     premium: Infinity,
   };
